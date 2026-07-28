@@ -658,16 +658,16 @@
                 slots[i].classList.remove('filled');
             }
         }
+        
+        // Проверяем: все ли 7 заданий выполнены И слово собрано
+        const allTasksDone = state.done.every(d => d === true);
         const word = state.letters.join('');
-        if (word === targetWord) {
+        
+        if (allTasksDone && word === targetWord) {
             document.getElementById('finalContainer').classList.remove('hidden');
             document.querySelectorAll('.task-card').forEach(el => el.style.display = 'none');
             document.querySelector('.subhead').textContent = '💜 Ты справилась! 💜';
-            // Показать пожелание
-            const wish = document.getElementById('finalWish').value || 'Ты самое лучшее! 💜';
-            document.getElementById('finalWishDisplay').textContent = '💌 ' + wish;
         }
-        updateProgress();
     }
 
     function updateProgress() {
