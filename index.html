@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💜 Мега-квест для ARMY</title>
+    <title>💜 Мега-квест для лучшей ARMY</title>
     <style>
         * {
             margin: 0;
@@ -451,7 +451,7 @@
                 <button class="btn" id="checkEmoji">Проверить все</button>
                 <span id="status6" class="status-badge">⏳</span>
             </div>
-            <div class="hint-text">Подсказка: Fire, Dynamite, Butter, ... (третья песня с пляжем)</div>
+        
         </div>
     </div>
     
@@ -606,6 +606,7 @@
     setupTask(4, 'input5', 'status5', 'check5', ['фиолетовый', 'фиолет', 'пурпурный'], 4, 'Х');
 
     // ===== ЗАДАНИЕ 6: ЭМОДЗИ (бонус, не даёт букву) =====
+    // ===== 6: ЭМОДЗИ =====
     document.getElementById('checkEmoji').addEventListener('click', function() {
         if (state.done[5]) {
             document.getElementById('status6').textContent = '✅ уже сделано';
@@ -626,8 +627,8 @@
             }
         }
         if (allCorrect) {
-            document.getElementById('status6').textContent = '✅ верно! Молодец!';
-            markDone(5);
+            document.getElementById('status6').textContent = '✅ верно! + буква Э';
+            markDone(5, 5, 'Э');  // 5 = taskId (6-е задание), 5 = индекс буквы, 'Э' = буква
         } else {
             document.getElementById('status6').textContent = '❌ не все угаданы, попробуй ещё';
         }
