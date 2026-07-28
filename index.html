@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>БОРАХЕ · Викторина для ARMY</title>
+    <title>💜 БОРАХЕ · Мега-квест для ARMY</title>
     <style>
         * {
             margin: 0;
@@ -15,24 +15,81 @@
         body {
             min-height: 100vh;
             background: linear-gradient(145deg, #f5edf7 0%, #e8dff0 50%, #d9cce8 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Плавающие сердечки */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: floatHeart linear infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes floatHeart {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
         }
 
         .container {
-            max-width: 820px;
-            width: 100%;
-            background: rgba(255, 248, 252, 0.7);
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 248, 252, 0.8);
             backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             border-radius: 48px;
             padding: 32px 28px 40px;
-            box-shadow: 0 20px 60px rgba(120, 80, 150, 0.15), 
-                        0 0 0 1px rgba(180, 140, 200, 0.2);
+            box-shadow: 0 20px 60px rgba(120, 80, 150, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.6);
-            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Прогресс-бар */
+        .progress-section {
+            margin-bottom: 25px;
+            background: rgba(200, 170, 220, 0.15);
+            border-radius: 30px;
+            padding: 12px 20px;
+            border: 1px solid rgba(180, 140, 200, 0.15);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(200, 170, 220, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #b48ad0, #8a6a9a);
+            border-radius: 10px;
+            transition: width 0.6s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #6a4a7a;
         }
 
         h1 {
@@ -57,7 +114,7 @@
         }
 
         .letter-panel {
-            background: rgba(200, 170, 220, 0.2);
+            background: rgba(200, 170, 220, 0.15);
             border-radius: 60px;
             padding: 12px 18px;
             display: flex;
@@ -65,8 +122,7 @@
             gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 28px;
-            border: 1px solid rgba(180, 140, 200, 0.25);
-            box-shadow: inset 0 0 30px rgba(180, 140, 200, 0.05);
+            border: 1px solid rgba(180, 140, 200, 0.2);
         }
 
         .letter-slot {
@@ -81,7 +137,6 @@
             font-weight: 600;
             color: #4a2e5c;
             border: 2px solid rgba(180, 140, 200, 0.3);
-            box-shadow: 0 2px 10px rgba(140, 100, 180, 0.05);
             transition: 0.4s ease;
         }
 
@@ -89,19 +144,22 @@
             border-color: #b48ad0;
             background: rgba(180, 138, 208, 0.15);
             box-shadow: 0 0 25px rgba(180, 138, 208, 0.2);
-            color: #4a2e5c;
             transform: scale(1.04);
         }
 
         .task-card {
             background: rgba(255, 248, 252, 0.5);
-            backdrop-filter: blur(4px);
             border-radius: 28px;
             padding: 22px 20px;
             margin-bottom: 18px;
             border: 1px solid rgba(200, 170, 220, 0.25);
-            transition: 0.2s;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 16px rgba(140, 100, 180, 0.06);
+        }
+
+        .task-card.completed {
+            border-color: #b48ad0;
+            background: rgba(180, 138, 208, 0.08);
         }
 
         .task-card:last-of-type {
@@ -127,7 +185,6 @@
             font-size: 0.75rem;
             font-weight: 600;
             color: #6a4a7a;
-            letter-spacing: 0.5px;
         }
 
         .task-body {
@@ -150,10 +207,6 @@
             outline: none;
         }
 
-        .task-body input::placeholder {
-            color: transparent;
-        }
-
         .task-body input:focus {
             border-color: #b48ad0;
             box-shadow: 0 0 0 4px rgba(180, 138, 208, 0.1);
@@ -171,7 +224,6 @@
             cursor: pointer;
             transition: 0.25s;
             margin: 4px 4px 4px 0;
-            backdrop-filter: blur(4px);
         }
 
         .btn:hover {
@@ -203,7 +255,6 @@
             color: #6a4a7a;
             border: 1px solid rgba(180, 140, 200, 0.15);
             display: inline-block;
-            font-weight: 400;
         }
 
         .flex-center {
@@ -219,6 +270,121 @@
             display: none !important;
         }
 
+        /* ===== ПАЗЛ ===== */
+        .puzzle-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            max-width: 300px;
+            margin: 12px auto;
+        }
+
+        .puzzle-piece {
+            aspect-ratio: 1;
+            background: rgba(180, 138, 208, 0.2);
+            border: 2px solid rgba(180, 140, 200, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            cursor: grab;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .puzzle-piece.dragging {
+            opacity: 0.5;
+            transform: scale(0.9);
+        }
+
+        .puzzle-piece.droppable {
+            border-color: #b48ad0;
+            background: rgba(180, 138, 208, 0.15);
+            box-shadow: 0 0 20px rgba(180, 138, 208, 0.2);
+        }
+
+        .puzzle-piece.placed {
+            cursor: default;
+            border-color: #8a6a9a;
+            background: rgba(180, 138, 208, 0.1);
+        }
+
+        /* ===== РАСКРАСКА ===== */
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 300px;
+            margin: 12px auto;
+        }
+
+        .color-cell {
+            aspect-ratio: 1;
+            background: #e8dff0;
+            border-radius: 12px;
+            border: 2px solid rgba(180, 140, 200, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .color-cell.colored {
+            border-color: #b48ad0;
+            transform: scale(0.95);
+        }
+
+        .color-cell:hover {
+            transform: scale(1.05);
+            border-color: #b48ad0;
+        }
+
+        /* ===== ЭМОДЗИ-ВИКТОРИНА ===== */
+        .emoji-quiz-item {
+            background: rgba(255, 248, 252, 0.4);
+            padding: 10px 14px;
+            border-radius: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .emoji-quiz-item .emojis {
+            font-size: 1.8rem;
+            min-width: 80px;
+        }
+
+        .emoji-quiz-item input {
+            max-width: 180px;
+        }
+
+        /* ===== ВИДЕО-БЛОК ===== */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 16px 0;
+            background: #1a0b2e;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 20px;
+        }
+
+        /* ===== ФИНАЛ ===== */
         .final-message {
             text-align: center;
             padding: 30px 20px;
@@ -226,6 +392,12 @@
             border-radius: 40px;
             border: 2px solid rgba(180, 138, 208, 0.2);
             margin-top: 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .final-message h2 {
@@ -243,15 +415,19 @@
             margin: 12px 0;
         }
 
-        .emoji-rain {
+        .confetti-container {
             font-size: 2.2rem;
-            animation: float 2s infinite alternate ease-in-out;
-            display: inline-block;
+            margin: 16px 0;
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(-3deg); }
-            100% { transform: translateY(-18px) rotate(3deg); }
+        .confetti-item {
+            display: inline-block;
+            animation: confettiFloat 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes confettiFloat {
+            0% { transform: translateY(0px) rotate(-5deg) scale(1); }
+            100% { transform: translateY(-20px) rotate(5deg) scale(1.1); }
         }
 
         .footer {
@@ -275,15 +451,32 @@
             .task-title { font-size: 1rem; }
             h1 { font-size: 1.6rem; }
             .final-message .big-word { font-size: 2.2rem; }
+            .puzzle-grid { max-width: 200px; }
+            .color-grid { max-width: 200px; }
         }
     </style>
 </head>
 <body>
-<div class="container" id="app">
-    <h1>🌸 БОРАХЕ 🌸</h1>
-    <div class="subhead">пройди 6 испытаний и собери заветное слово</div>
 
-    <!-- Панель букв -->
+<!-- Плавающие сердечки -->
+<div class="floating-hearts" id="floatingHearts"></div>
+
+<div class="container">
+    <!-- Прогресс -->
+    <div class="progress-section">
+        <div class="progress-text">
+            <span>💜 Прогресс</span>
+            <span id="progressCount">0 / 10</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+
+    <h1>🌸 БОРАХЕ 🌸</h1>
+    <div class="subhead">пройди 10 испытаний и собери заветное слово</div>
+
+    <!-- Буквы -->
     <div class="letter-panel" id="letterPanel">
         <div class="letter-slot" id="slot0">?</div>
         <div class="letter-slot" id="slot1">?</div>
@@ -295,9 +488,9 @@
 
     <!-- ===== ЗАДАНИЕ 1 ===== -->
     <div class="task-card" id="task1">
-        <div class="task-title">📅 День, который всё изменил <span>1/6</span></div>
+        <div class="task-title">📅 День, который всё изменил <span>1/10</span></div>
         <div class="task-body">
-            <p>Введи дату дебюта BTS (день и месяц, 4 цифры, например: 0101)</p>
+            <p>Введи дату дебюта BTS (день и месяц, 4 цифры)</p>
             <div class="flex-center">
                 <input type="text" id="input1" maxlength="4" style="max-width:140px; text-align:center;">
                 <button class="btn" id="check1">Проверить</button>
@@ -308,39 +501,37 @@
 
     <!-- ===== ЗАДАНИЕ 2 ===== -->
     <div class="task-card" id="task2">
-        <div class="task-title">👥 Семь звёзд <span>2/6</span></div>
+        <div class="task-title">👥 Семь звёзд <span>2/10</span></div>
         <div class="task-body">
-            <p>Напиши имена всех 7 участников BTS через запятую (на русском или английском)</p>
+            <p>Напиши имена всех 7 участников BTS через запятую</p>
             <div class="flex-center">
-                <input type="text" id="input2" placeholder=" " style="max-width:400px;">
+                <input type="text" id="input2" style="max-width:400px;">
                 <button class="btn" id="check2">Проверить</button>
                 <span id="status2" class="status-badge">⏳</span>
             </div>
-            <div class="hint-text">Подсказка: RM, Jin, Suga, J-Hope, Jimin, V, Jungkook</div>
         </div>
     </div>
 
     <!-- ===== ЗАДАНИЕ 3 ===== -->
     <div class="task-card" id="task3">
-        <div class="task-title">💿 Альбом-исцеление <span>3/6</span></div>
+        <div class="task-title">💿 Альбом-исцеление <span>3/10</span></div>
         <div class="task-body">
             <p>Как называется альбом BTS, вышедший в 2020 году?</p>
             <div class="flex-center">
-                <input type="text" id="input3" placeholder=" " style="max-width:200px;">
+                <input type="text" id="input3" style="max-width:200px;">
                 <button class="btn" id="check3">Проверить</button>
                 <span id="status3" class="status-badge">⏳</span>
             </div>
-            <div class="hint-text">Две буквы, название очень короткое</div>
         </div>
     </div>
 
     <!-- ===== ЗАДАНИЕ 4 ===== -->
     <div class="task-card" id="task4">
-        <div class="task-title">💜 Самое тёплое сообщество <span>4/6</span></div>
+        <div class="task-title">💜 Самое тёплое сообщество <span>4/10</span></div>
         <div class="task-body">
             <p>Как называется фан-клуб BTS?</p>
             <div class="flex-center">
-                <input type="text" id="input4" placeholder=" " style="max-width:200px;">
+                <input type="text" id="input4" style="max-width:200px;">
                 <button class="btn" id="check4">Проверить</button>
                 <span id="status4" class="status-badge">⏳</span>
             </div>
@@ -349,11 +540,11 @@
 
     <!-- ===== ЗАДАНИЕ 5 ===== -->
     <div class="task-card" id="task5">
-        <div class="task-title">🌈 Цвет твоей души <span>5/6</span></div>
+        <div class="task-title">🌈 Цвет твоей души <span>5/10</span></div>
         <div class="task-body">
             <p>Какой цвет стал символом BTS и ARMY?</p>
             <div class="flex-center">
-                <input type="text" id="input5" placeholder=" " style="max-width:200px;">
+                <input type="text" id="input5" style="max-width:200px;">
                 <button class="btn" id="check5">Проверить</button>
                 <span id="status5" class="status-badge">⏳</span>
             </div>
@@ -362,33 +553,147 @@
 
     <!-- ===== ЗАДАНИЕ 6 ===== -->
     <div class="task-card" id="task6">
-        <div class="task-title">💫 Секретная фраза <span>6/6</span></div>
+        <div class="task-title">💫 Секретная фраза <span>6/10</span></div>
         <div class="task-body">
-            <p>Напиши знаменитую фразу, которую BTS говорят ARMY (на корейском или русском)</p>
+            <p>Напиши знаменитую фразу BTS для ARMY (на корейском или русском)</p>
             <div class="flex-center">
-                <input type="text" id="input6" placeholder=" " style="max-width:280px;">
+                <input type="text" id="input6" style="max-width:280px;">
                 <button class="btn" id="check6">Проверить</button>
                 <span id="status6" class="status-badge">⏳</span>
             </div>
-            <div class="hint-text">Подсказка: начинается на "бо..."</div>
+        </div>
+    </div>
+
+    <!-- ===== ЗАДАНИЕ 7: ЭМОДЗИ-ВИКТОРИНА ===== -->
+    <div class="task-card" id="task7">
+        <div class="task-title">🎵 Угадай песню по эмодзи <span>7/10</span></div>
+        <div class="task-body">
+            <p>Отгадай 5 песен BTS по эмодзи-подсказкам:</p>
+            <div class="emoji-quiz-item">
+                <span class="emojis">🌊💜</span>
+                <input type="text" id="emoji1" placeholder=" " style="max-width:150px;">
+            </div>
+            <div class="emoji-quiz-item">
+                <span class="emojis">🔥😢</span>
+                <input type="text" id="emoji2" placeholder=" " style="max-width:150px;">
+            </div>
+            <div class="emoji-quiz-item">
+                <span class="emojis">💃🕺</span>
+                <input type="text" id="emoji3" placeholder=" " style="max-width:150px;">
+            </div>
+            <div class="emoji-quiz-item">
+                <span class="emojis">🌙✨</span>
+                <input type="text" id="emoji4" placeholder=" " style="max-width:150px;">
+            </div>
+            <div class="emoji-quiz-item">
+                <span class="emojis">💜🚀</span>
+                <input type="text" id="emoji5" placeholder=" " style="max-width:150px;">
+            </div>
+            <div class="flex-center">
+                <button class="btn" id="checkEmoji">Проверить все</button>
+                <span id="status7" class="status-badge">⏳</span>
+            </div>
+            <div class="hint-text">Подсказка: Butter, Fire, Dynamite, Moon, Spring Day</div>
+        </div>
+    </div>
+
+    <!-- ===== ЗАДАНИЕ 8: ПАЗЛ ===== -->
+    <div class="task-card" id="task8">
+        <div class="task-title">🧩 Собери пазл <span>8/10</span></div>
+        <div class="task-body">
+            <p>Перетащи кусочки, чтобы собрать слово 💜</p>
+            <div class="puzzle-grid" id="puzzleGrid">
+                <div class="puzzle-piece" draggable="true" data-piece="1">💜</div>
+                <div class="puzzle-piece" draggable="true" data-piece="2">보</div>
+                <div class="puzzle-piece" draggable="true" data-piece="3">라</div>
+                <div class="puzzle-piece" draggable="true" data-piece="4">해</div>
+                <div class="puzzle-piece" draggable="true" data-piece="5">💜</div>
+                <div class="puzzle-piece" draggable="true" data-piece="6">✨</div>
+                <div class="puzzle-piece" draggable="true" data-piece="7">🌸</div>
+                <div class="puzzle-piece" draggable="true" data-piece="8">🌙</div>
+                <div class="puzzle-piece" draggable="true" data-piece="9">⭐</div>
+            </div>
+            <div class="flex-center">
+                <button class="btn" id="checkPuzzle">Проверить пазл</button>
+                <span id="status8" class="status-badge">⏳</span>
+            </div>
+            <div class="hint-text">Собери 3 одинаковых эмодзи в ряд</div>
+        </div>
+    </div>
+
+    <!-- ===== ЗАДАНИЕ 9: РАСКРАСКА ===== -->
+    <div class="task-card" id="task9">
+        <div class="task-title">🎨 Раскрась логотип <span>9/10</span></div>
+        <div class="task-body">
+            <p>Кликай на клеточки, чтобы раскрасить их в фиолетовый 💜</p>
+            <div class="color-grid" id="colorGrid">
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+                <div class="color-cell" data-colored="false"></div>
+            </div>
+            <div class="flex-center">
+                <span id="colorCount">0 / 16</span>
+                <button class="btn" id="checkColor">Проверить</button>
+                <span id="status9" class="status-badge">⏳</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== ЗАДАНИЕ 10: ФИНАЛЬНАЯ ОТКРЫТКА С ВИДЕО ===== -->
+    <div class="task-card" id="task10">
+        <div class="task-title">💝 Душевное поздравление <span>10/10</span></div>
+        <div class="task-body">
+            <p>Посмотри видео и напиши, что ты чувствуешь 💜</p>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/X3-9fBv1P7M" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                </iframe>
+            </div>
+            <p style="margin-top:10px;">Напиши своё пожелание для подруги (или просто нажми "Готово"):</p>
+            <div class="flex-center">
+                <input type="text" id="finalWish" placeholder="Я желаю тебе..." style="max-width:400px;">
+                <button class="btn btn-success" id="checkFinal">💜 Готово!</button>
+                <span id="status10" class="status-badge">⏳</span>
+            </div>
+            <div class="hint-text">Твоё пожелание появится в финальной открытке</div>
         </div>
     </div>
 
     <!-- ===== ФИНАЛ ===== -->
     <div id="finalContainer" class="hidden final-message">
-        <h2>🎉 ТЫ СОБРАЛА СЛОВО:</h2>
+        <h2>🎉 ПОЗДРАВЛЯЮ, ARMY! 🎉</h2>
         <div class="big-word">БОРАХЕ</div>
         <div style="font-size:2.2rem; margin:8px 0; letter-spacing:8px;">💜💜💜</div>
         <p style="color:#5a406a; font-size:1.2rem; font-weight:400;">
-            보라해 — «Я буду любить тебя фиолетовым цветом» <br>
-            С днём рождения, наша ARMY! 💜
+            보라해 — «Я буду любить тебя фиолетовым цветом» 💜<br>
+            <span id="finalWishDisplay" style="font-style:italic; color:#8a6a9a;"></span>
         </p>
-        <div style="margin:16px 0; font-size:2rem;">
-            <span class="emoji-rain">🌸</span>
-            <span class="emoji-rain" style="animation-delay:0.4s;">💜</span>
-            <span class="emoji-rain" style="animation-delay:0.8s;">✨</span>
-            <span class="emoji-rain" style="animation-delay:1.2s;">🌙</span>
+        <div class="confetti-container">
+            <span class="confetti-item" style="animation-delay:0s;">🌸</span>
+            <span class="confetti-item" style="animation-delay:0.3s;">💜</span>
+            <span class="confetti-item" style="animation-delay:0.6s;">✨</span>
+            <span class="confetti-item" style="animation-delay:0.9s;">🌙</span>
+            <span class="confetti-item" style="animation-delay:1.2s;">⭐</span>
+            <span class="confetti-item" style="animation-delay:1.5s;">💜</span>
         </div>
+        <p style="color:#7a5c8a; font-size:0.95rem; margin-top:10px;">
+            С днём рождения, наша прекрасная ARMY!<br>
+            Ты прошла все 10 испытаний и доказала свою любовь к BTS!
+        </p>
     </div>
 
     <div class="footer">✧ BTS · БОРАХЕ · для самой прекрасной ARMY ✧</div>
@@ -396,23 +701,35 @@
 
 <script>
 (function(){
-    // ----- СОСТОЯНИЕ -----
     const state = {
         letters: ['', '', '', '', '', ''],
-        done: [false, false, false, false, false, false]
+        done: [false, false, false, false, false, false, false, false, false, false],
+        puzzleSolved: false,
+        colorCount: 0
     };
 
     const targetWord = 'БОРАХЕ';
-    const slots = [
-        document.getElementById('slot0'),
-        document.getElementById('slot1'),
-        document.getElementById('slot2'),
-        document.getElementById('slot3'),
-        document.getElementById('slot4'),
-        document.getElementById('slot5')
-    ];
+    const slots = document.querySelectorAll('.letter-slot');
+    const progressFill = document.getElementById('progressFill');
+    const progressCount = document.getElementById('progressCount');
 
-    // Обновление панели букв
+    // Плавающие сердечки
+    function createFloatingHearts() {
+        const container = document.getElementById('floatingHearts');
+        const emojis = ['💜', '🌸', '✨', '🌙', '⭐'];
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.textContent = emojis[i % emojis.length];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (15 + Math.random() * 20) + 's';
+            heart.style.animationDelay = (Math.random() * 15) + 's';
+            heart.style.fontSize = (0.8 + Math.random() * 1.5) + 'rem';
+            container.appendChild(heart);
+        }
+    }
+    createFloatingHearts();
+
     function updatePanel() {
         for (let i = 0; i < 6; i++) {
             if (state.letters[i]) {
@@ -423,16 +740,24 @@
                 slots[i].classList.remove('filled');
             }
         }
-        // Проверка финала
         const word = state.letters.join('');
         if (word === targetWord) {
             document.getElementById('finalContainer').classList.remove('hidden');
             document.querySelectorAll('.task-card').forEach(el => el.style.display = 'none');
             document.querySelector('.subhead').textContent = '💜 Ты справилась! 💜';
+            // Показать пожелание
+            const wish = document.getElementById('finalWish').value || 'Ты самое лучшее! 💜';
+            document.getElementById('finalWishDisplay').textContent = '💌 ' + wish;
         }
+        updateProgress();
     }
 
-    // Установка буквы
+    function updateProgress() {
+        const done = state.done.filter(Boolean).length;
+        progressCount.textContent = `${done} / 10`;
+        progressFill.style.width = `${(done / 10) * 100}%`;
+    }
+
     function setLetter(index, letter) {
         if (index >= 0 && index < 6 && !state.letters[index]) {
             state.letters[index] = letter;
@@ -442,7 +767,20 @@
         return false;
     }
 
-    // Универсальная проверка для задания
+    function markDone(taskId, letterIndex, letter) {
+        if (!state.done[taskId]) {
+            state.done[taskId] = true;
+            document.getElementById(`task${taskId+1}`).classList.add('completed');
+            if (letter && letterIndex !== undefined) {
+                setLetter(letterIndex, letter);
+            }
+            updateProgress();
+            return true;
+        }
+        return false;
+    }
+
+    // ===== Универсальная проверка =====
     function setupTask(taskId, inputId, statusId, checkId, correctAnswers, letterIndex, letter) {
         const input = document.getElementById(inputId);
         const status = document.getElementById(statusId);
@@ -454,8 +792,7 @@
                 return;
             }
             const val = input.value.trim().toLowerCase();
-            // Приводим всё к единому формату
-            const normalized = val.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const normalized = val.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             
             let isCorrect = false;
             for (let ans of correctAnswers) {
@@ -467,52 +804,198 @@
             }
 
             if (isCorrect) {
-                state.done[taskId] = true;
                 status.textContent = `✅ верно! + буква ${letter}`;
-                setLetter(letterIndex, letter);
+                markDone(taskId, letterIndex, letter);
                 input.disabled = true;
                 btn.disabled = true;
             } else {
-                status.textContent = '❌ не совсем, попробуй ещё';
+                status.textContent = '❌ попробуй ещё';
             }
         });
 
-        // Enter на инпуте
         input.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                btn.click();
-            }
+            if (e.key === 'Enter') btn.click();
         });
     }
 
-    // ----- ЗАДАНИЕ 1: Дата дебюта 130613 (или 0613) -----
-    setupTask(0, 'input1', 'status1', 'check1', ['130613', '0613', '13.06', '13.06.2013'], 0, 'Б');
-
-    // ----- ЗАДАНИЕ 2: Имена участников (разные варианты) -----
-    const namesSet = [
+    // ===== 1-6: Обычные задания =====
+    setupTask(0, 'input1', 'status1', 'check1', ['130613', '0613', '13.06'], 0, 'Б');
+    setupTask(1, 'input2', 'status2', 'check2', [
         'рм, джин, шуга, джей-хоуп, чимин, ви, джонгук',
-        'rm, jin, suga, j-hope, jimin, v, jungkook',
-        'рм джин шуга джей-хоуп чимин ви джонгук',
-        'rm jin suga jhope jimin v jungkook'
-    ];
-    setupTask(1, 'input2', 'status2', 'check2', namesSet, 1, 'О');
-
-    // ----- ЗАДАНИЕ 3: Альбом BE -----
+        'rm, jin, suga, j-hope, jimin, v, jungkook'
+    ], 1, 'О');
     setupTask(2, 'input3', 'status3', 'check3', ['be', 'вэ'], 2, 'Р');
-
-    // ----- ЗАДАНИЕ 4: Фан-клуб ARMY -----
     setupTask(3, 'input4', 'status4', 'check4', ['army', 'арми'], 3, 'А');
-
-    // ----- ЗАДАНИЕ 5: Цвет фиолетовый -----
     setupTask(4, 'input5', 'status5', 'check5', ['фиолетовый', 'фиолет', 'пурпурный'], 4, 'Х');
-
-    // ----- ЗАДАНИЕ 6: БОРАХЕ -----
     setupTask(5, 'input6', 'status6', 'check6', ['борахе', 'borahae', '보라해'], 5, 'Е');
 
-    // Инициализация панели
-    updatePanel();
+    // ===== 7: ЭМОДЗИ =====
+    document.getElementById('checkEmoji').addEventListener('click', function() {
+        if (state.done[6]) {
+            document.getElementById('status7').textContent = '✅ уже сделано';
+            return;
+        }
+        const answers = [
+            document.getElementById('emoji1').value.trim().toLowerCase(),
+            document.getElementById('emoji2').value.trim().toLowerCase(),
+            document.getElementById('emoji3').value.trim().toLowerCase(),
+            document.getElementById('emoji4').value.trim().toLowerCase(),
+            document.getElementById('emoji5').value.trim().toLowerCase()
+        ];
+        const correct = ['butter', 'fire', 'dynamite', 'moon', 'spring day'];
+        let allCorrect = true;
+        for (let i = 0; i < 5; i++) {
+            if (!correct.some(c => answers[i].includes(c))) {
+                allCorrect = false;
+                break;
+            }
+        }
+        if (allCorrect) {
+            document.getElementById('status7').textContent = '✅ верно! + буква (уже есть)';
+            markDone(6);
+            // Даём дополнительную подсказку или просто отмечаем
+        } else {
+            document.getElementById('status7').textContent = '❌ не все угаданы, попробуй ещё';
+        }
+    });
 
-    // Дополнительно: чтобы при вводе не было placeholder, уже убрано в HTML
+    // ===== 8: ПАЗЛ =====
+    let puzzlePieces = document.querySelectorAll('.puzzle-piece');
+    let draggedPiece = null;
+
+    puzzlePieces.forEach(piece => {
+        piece.addEventListener('dragstart', function(e) {
+            if (this.classList.contains('placed')) return;
+            draggedPiece = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+        });
+
+        piece.addEventListener('dragend', function() {
+            this.classList.remove('dragging');
+        });
+
+        piece.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            if (this !== draggedPiece && !this.classList.contains('placed')) {
+                this.classList.add('droppable');
+            }
+        });
+
+        piece.addEventListener('dragleave', function() {
+            this.classList.remove('droppable');
+        });
+
+        piece.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('droppable');
+            if (this !== draggedPiece && !this.classList.contains('placed') && !draggedPiece.classList.contains('placed')) {
+                // Меняем местами
+                const tempText = this.textContent;
+                const tempData = this.dataset.piece;
+                this.textContent = draggedPiece.textContent;
+                this.dataset.piece = draggedPiece.dataset.piece;
+                draggedPiece.textContent = tempText;
+                draggedPiece.dataset.piece = tempData;
+            }
+        });
+    });
+
+    document.getElementById('checkPuzzle').addEventListener('click', function() {
+        if (state.done[7]) {
+            document.getElementById('status8').textContent = '✅ уже сделано';
+            return;
+        }
+        const pieces = document.querySelectorAll('.puzzle-piece');
+        const values = Array.from(pieces).map(p => p.textContent);
+        // Проверяем, есть ли 3 одинаковых в ряд (по сетке 3x3)
+        let solved = false;
+        for (let row = 0; row < 3; row++) {
+            if (values[row*3] === values[row*3+1] && values[row*3+1] === values[row*3+2]) {
+                solved = true;
+                break;
+            }
+        }
+        if (!solved) {
+            for (let col = 0; col < 3; col++) {
+                if (values[col] === values[col+3] && values[col+3] === values[col+6]) {
+                    solved = true;
+                    break;
+                }
+            }
+        }
+        if (solved) {
+            document.getElementById('status8').textContent = '✅ пазл собран!';
+            markDone(7);
+            pieces.forEach(p => p.classList.add('placed'));
+        } else {
+            document.getElementById('status8').textContent = '❌ не хватает 3 в ряд';
+        }
+    });
+
+    // ===== 9: РАСКРАСКА =====
+    const colorCells = document.querySelectorAll('.color-cell');
+    const colorCountEl = document.getElementById('colorCount');
+
+    colorCells.forEach(cell => {
+        cell.addEventListener('click', function() {
+            if (this.dataset.colored === 'false') {
+                this.dataset.colored = 'true';
+                this.style.background = 'linear-gradient(135deg, #b48ad0, #8a6a9a)';
+                this.classList.add('colored');
+                this.textContent = '💜';
+                state.colorCount++;
+                colorCountEl.textContent = `${state.colorCount} / 16`;
+            } else {
+                this.dataset.colored = 'false';
+                this.style.background = '#e8dff0';
+                this.classList.remove('colored');
+                this.textContent = '';
+                state.colorCount--;
+                colorCountEl.textContent = `${state.colorCount} / 16`;
+            }
+        });
+    });
+
+    document.getElementById('checkColor').addEventListener('click', function() {
+        if (state.done[8]) {
+            document.getElementById('status9').textContent = '✅ уже сделано';
+            return;
+        }
+        if (state.colorCount >= 12) {
+            document.getElementById('status9').textContent = '✅ классно!';
+            markDone(8);
+        } else {
+            document.getElementById('status9').textContent = `❌ нужно закрасить хотя бы 12 (у тебя ${state.colorCount})`;
+        }
+    });
+
+    // ===== 10: ФИНАЛЬНАЯ ОТКРЫТКА =====
+    document.getElementById('checkFinal').addEventListener('click', function() {
+        if (state.done[9]) {
+            document.getElementById('status10').textContent = '✅ уже готово';
+            return;
+        }
+        const wish = document.getElementById('finalWish').value.trim();
+        if (wish.length > 0) {
+            document.getElementById('status10').textContent = '💜 спасибо за тёплые слова!';
+            markDone(9);
+            // Показываем финал, если все остальные задания сделаны
+            updatePanel();
+        } else {
+            document.getElementById('status10').textContent = '💜 напиши хоть что-нибудь или нажми "Готово"';
+            // Можно пропустить с пустым пожеланием
+            if (confirm('Хочешь пропустить это задание?')) {
+                document.getElementById('status10').textContent = '💜 пропущено';
+                markDone(9);
+                updatePanel();
+            }
+        }
+    });
+
+    // Инициализация
+    updatePanel();
+    updateProgress();
 })();
 </script>
 </body>
