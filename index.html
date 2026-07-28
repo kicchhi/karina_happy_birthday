@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💜 БОРАХЭ · Мега-квест для ARMY</title>
+    <title>💜 Мега-квест для ARMY</title>
     <style>
         * {
             margin: 0;
@@ -466,14 +466,12 @@
     <div class="progress-section">
         <div class="progress-text">
             <span>💜 Прогресс</span>
-            <span id="progressCount">0 / 10</span>
+            <span id="progressCount">0 / 7</span>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
     </div>
-
-    <h1>🌸 БОРАХЭ 🌸</h1>
     <div class="subhead">пройди все испытания и собери заветное слово</div>
 
     <!-- Буквы -->
@@ -488,7 +486,7 @@
 
     <!-- ===== ЗАДАНИЕ 1 ===== -->
     <div class="task-card" id="task1">
-        <div class="task-title">📅 День, который всё изменил <span>1/10</span></div>
+        <div class="task-title">📅 День, который всё изменил <span>1/7</span></div>
         <div class="task-body">
             <p>Введи дату дебюта BTS (день и месяц, 4 цифры)</p>
             <div class="flex-center">
@@ -501,7 +499,7 @@
 
     <!-- ===== ЗАДАНИЕ 2 ===== -->
     <div class="task-card" id="task2">
-        <div class="task-title">👥 Семь звёзд <span>2/10</span></div>
+        <div class="task-title">👥 Семь звёзд <span>2/7</span></div>
         <div class="task-body">
             <p>Что изображено на логотипе BTS?</p>
             <div class="flex-center">
@@ -514,7 +512,7 @@
 
     <!-- ===== ЗАДАНИЕ 3 ===== -->
     <div class="task-card" id="task3">
-        <div class="task-title">💿 Альбом-исцеление <span>3/10</span></div>
+        <div class="task-title">💿 Альбом-исцеление <span>3/7</span></div>
         <div class="task-body">
             <p>Как называется альбом BTS, вышедший в 2020 году?</p>
             <div class="flex-center">
@@ -527,7 +525,7 @@
 
     <!-- ===== ЗАДАНИЕ 4 ===== -->
     <div class="task-card" id="task4">
-        <div class="task-title">💜 Самое тёплое сообщество <span>4/10</span></div>
+        <div class="task-title">💜 Самое тёплое сообщество <span>4/7</span></div>
         <div class="task-body">
             <p>Как называется фан-клуб BTS?</p>
             <div class="flex-center">
@@ -540,7 +538,7 @@
 
     <!-- ===== ЗАДАНИЕ 5 ===== -->
     <div class="task-card" id="task5">
-        <div class="task-title">🌈 Цвет твоей души <span>5/10</span></div>
+        <div class="task-title">🌈 Цвет твоей души <span>5/7</span></div>
         <div class="task-body">
             <p>Какой цвет стал символом BTS и ARMY?</p>
             <div class="flex-center">
@@ -553,7 +551,7 @@
 
     <!-- ===== ЗАДАНИЕ 6 ===== -->
     <div class="task-card" id="task6">
-        <div class="task-title">💫 Секретная фраза <span>6/10</span></div>
+        <div class="task-title">💫 Секретная фраза <span>6/7</span></div>
         <div class="task-body">
             <p>Напиши знаменитую фразу BTS для ARMY (на корейском или русском)</p>
             <div class="flex-center">
@@ -566,7 +564,7 @@
 
     <!-- ===== ЗАДАНИЕ 7: ЭМОДЗИ-ВИКТОРИНА ===== -->
     <div class="task-card" id="task7">
-        <div class="task-title">🎵 Угадай песню по эмодзи <span>7/10</span></div>
+        <div class="task-title">🎵 БОНУС: Угадай песню по эмодзи <span>7/7</span></div>
         <div class="task-body">
             <p>Отгадай 5 песен BTS по эмодзи-подсказкам:</p>
             <div class="emoji-quiz-item">
@@ -592,31 +590,7 @@
             <div class="hint-text">Подсказка: не будет подсказки))</div>
         </div>
     </div>
-
-    <!-- ===== ЗАДАНИЕ 8: ПАЗЛ ===== -->
-    <div class="task-card" id="task8">
-        <div class="task-title">🧩 Собери пазл <span>8/10</span></div>
-        <div class="task-body">
-            <p>Перетащи кусочки, чтобы собрать слово 💜</p>
-            <div class="puzzle-grid" id="puzzleGrid">
-                <div class="puzzle-piece" draggable="true" data-piece="1">💜</div>
-                <div class="puzzle-piece" draggable="true" data-piece="2">보</div>
-                <div class="puzzle-piece" draggable="true" data-piece="3">라</div>
-                <div class="puzzle-piece" draggable="true" data-piece="4">해</div>
-                <div class="puzzle-piece" draggable="true" data-piece="5">💜</div>
-                <div class="puzzle-piece" draggable="true" data-piece="6">✨</div>
-                <div class="puzzle-piece" draggable="true" data-piece="7">🌸</div>
-                <div class="puzzle-piece" draggable="true" data-piece="8">🌙</div>
-                <div class="puzzle-piece" draggable="true" data-piece="9">⭐</div>
-            </div>
-            <div class="flex-center">
-                <button class="btn" id="checkPuzzle">Проверить пазл</button>
-                <span id="status8" class="status-badge">⏳</span>
-            </div>
-            <div class="hint-text">Собери 3 одинаковых эмодзи в ряд</div>
-        </div>
-    </div>
-
+    
     <!-- ===== ФИНАЛ ===== -->
     <div id="finalContainer" class="hidden final-message">
         <h2>🎉 ПОЗДРАВЛЯЮ, ARMY! 🎉</h2>
