@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💜 БОРАХЕ · Мега-квест для ARMY</title>
+    <title>💜 БОРАХЭ · Мега-квест для ARMY</title>
     <style>
         * {
             margin: 0;
@@ -473,8 +473,8 @@
         </div>
     </div>
 
-    <h1>🌸 БОРАХЕ 🌸</h1>
-    <div class="subhead">пройди 10 испытаний и собери заветное слово</div>
+    <h1>🌸 БОРАХЭ 🌸</h1>
+    <div class="subhead">пройди все испытания и собери заветное слово</div>
 
     <!-- Буквы -->
     <div class="letter-panel" id="letterPanel">
@@ -503,7 +503,7 @@
     <div class="task-card" id="task2">
         <div class="task-title">👥 Семь звёзд <span>2/10</span></div>
         <div class="task-body">
-            <p>Напиши имена всех 7 участников BTS через запятую</p>
+            <p>Что изображено на логотипе BTS?</p>
             <div class="flex-center">
                 <input type="text" id="input2" style="max-width:400px;">
                 <button class="btn" id="check2">Проверить</button>
@@ -570,30 +570,26 @@
         <div class="task-body">
             <p>Отгадай 5 песен BTS по эмодзи-подсказкам:</p>
             <div class="emoji-quiz-item">
-                <span class="emojis">🌊💜</span>
+                <span class="emojis">🔥🥵</span>
                 <input type="text" id="emoji1" placeholder=" " style="max-width:150px;">
             </div>
             <div class="emoji-quiz-item">
-                <span class="emojis">🔥😢</span>
+                <span class="emojis">🧨💥</span>
                 <input type="text" id="emoji2" placeholder=" " style="max-width:150px;">
             </div>
             <div class="emoji-quiz-item">
-                <span class="emojis">💃🕺</span>
+                <span class="emojis">🧈🫠</span>
                 <input type="text" id="emoji3" placeholder=" " style="max-width:150px;">
             </div>
             <div class="emoji-quiz-item">
-                <span class="emojis">🌙✨</span>
+                <span class="emojis">🌊🩱</span>
                 <input type="text" id="emoji4" placeholder=" " style="max-width:150px;">
-            </div>
-            <div class="emoji-quiz-item">
-                <span class="emojis">💜🚀</span>
-                <input type="text" id="emoji5" placeholder=" " style="max-width:150px;">
             </div>
             <div class="flex-center">
                 <button class="btn" id="checkEmoji">Проверить все</button>
                 <span id="status7" class="status-badge">⏳</span>
             </div>
-            <div class="hint-text">Подсказка: Butter, Fire, Dynamite, Moon, Spring Day</div>
+            <div class="hint-text">Подсказка: не будет подсказки))</div>
         </div>
     </div>
 
@@ -621,62 +617,10 @@
         </div>
     </div>
 
-    <!-- ===== ЗАДАНИЕ 9: РАСКРАСКА ===== -->
-    <div class="task-card" id="task9">
-        <div class="task-title">🎨 Раскрась логотип <span>9/10</span></div>
-        <div class="task-body">
-            <p>Кликай на клеточки, чтобы раскрасить их в фиолетовый 💜</p>
-            <div class="color-grid" id="colorGrid">
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-                <div class="color-cell" data-colored="false"></div>
-            </div>
-            <div class="flex-center">
-                <span id="colorCount">0 / 16</span>
-                <button class="btn" id="checkColor">Проверить</button>
-                <span id="status9" class="status-badge">⏳</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== ЗАДАНИЕ 10: ФИНАЛЬНАЯ ОТКРЫТКА С ВИДЕО ===== -->
-    <div class="task-card" id="task10">
-        <div class="task-title">💝 Душевное поздравление <span>10/10</span></div>
-        <div class="task-body">
-            <p>Посмотри видео и напиши, что ты чувствуешь 💜</p>
-            <div class="video-container">
-                <iframe src="https://www.youtube.com/embed/X3-9fBv1P7M" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                </iframe>
-            </div>
-            <p style="margin-top:10px;">Напиши своё пожелание для подруги (или просто нажми "Готово"):</p>
-            <div class="flex-center">
-                <input type="text" id="finalWish" placeholder="Я желаю тебе..." style="max-width:400px;">
-                <button class="btn btn-success" id="checkFinal">💜 Готово!</button>
-                <span id="status10" class="status-badge">⏳</span>
-            </div>
-            <div class="hint-text">Твоё пожелание появится в финальной открытке</div>
-        </div>
-    </div>
-
     <!-- ===== ФИНАЛ ===== -->
     <div id="finalContainer" class="hidden final-message">
         <h2>🎉 ПОЗДРАВЛЯЮ, ARMY! 🎉</h2>
-        <div class="big-word">БОРАХЕ</div>
+        <div class="big-word">БОРАХЭ</div>
         <div style="font-size:2.2rem; margin:8px 0; letter-spacing:8px;">💜💜💜</div>
         <p style="color:#5a406a; font-size:1.2rem; font-weight:400;">
             보라해 — «Я буду любить тебя фиолетовым цветом» 💜<br>
@@ -691,12 +635,12 @@
             <span class="confetti-item" style="animation-delay:1.5s;">💜</span>
         </div>
         <p style="color:#7a5c8a; font-size:0.95rem; margin-top:10px;">
-            С днём рождения, наша прекрасная ARMY!<br>
-            Ты прошла все 10 испытаний и доказала свою любовь к BTS!
+            С днём рождения, наша прекрасная Кариша!<br>
+            Ты прошла все испытания и доказала свою любовь к BTS!
         </p>
     </div>
 
-    <div class="footer">✧ BTS · БОРАХЕ · для самой прекрасной ARMY ✧</div>
+    <div class="footer">✧ BTS · БОРАХЭ · для самой прекрасной ARMY ✧</div>
 </div>
 
 <script>
@@ -819,19 +763,18 @@
     }
 
     // ===== 1-6: Обычные задания =====
-    setupTask(0, 'input1', 'status1', 'check1', ['130613', '0613', '13.06'], 0, 'Б');
+    setupTask(0, 'input1', 'status1', 'check1', ['130613', '0613', '13.06', '1306'], 0, 'Б');
     setupTask(1, 'input2', 'status2', 'check2', [
-        'рм, джин, шуга, джей-хоуп, чимин, ви, джонгук',
-        'rm, jin, suga, j-hope, jimin, v, jungkook'
+        'бронежилет',
     ], 1, 'О');
     setupTask(2, 'input3', 'status3', 'check3', ['be', 'вэ'], 2, 'Р');
     setupTask(3, 'input4', 'status4', 'check4', ['army', 'арми'], 3, 'А');
     setupTask(4, 'input5', 'status5', 'check5', ['фиолетовый', 'фиолет', 'пурпурный'], 4, 'Х');
-    setupTask(5, 'input6', 'status6', 'check6', ['борахе', 'borahae', '보라해'], 5, 'Е');
+    setupTask(5, 'input6', 'status6', 'check6', ['борахе', 'borahae', '보라해'], 5, 'Э');
 
     // ===== 7: ЭМОДЗИ =====
     document.getElementById('checkEmoji').addEventListener('click', function() {
-        if (state.done[6]) {
+        if (state.done[5]) {
             document.getElementById('status7').textContent = '✅ уже сделано';
             return;
         }
@@ -840,11 +783,10 @@
             document.getElementById('emoji2').value.trim().toLowerCase(),
             document.getElementById('emoji3').value.trim().toLowerCase(),
             document.getElementById('emoji4').value.trim().toLowerCase(),
-            document.getElementById('emoji5').value.trim().toLowerCase()
         ];
-        const correct = ['butter', 'fire', 'dynamite', 'moon', 'spring day'];
+        const correct = ['fire', 'dynamite', 'butter', 'swim'];
         let allCorrect = true;
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 4; i++) {
             if (!correct.some(c => answers[i].includes(c))) {
                 allCorrect = false;
                 break;
@@ -852,7 +794,7 @@
         }
         if (allCorrect) {
             document.getElementById('status7').textContent = '✅ верно! + буква (уже есть)';
-            markDone(6);
+            markDone(5);
             // Даём дополнительную подсказку или просто отмечаем
         } else {
             document.getElementById('status7').textContent = '❌ не все угаданы, попробуй ещё';
