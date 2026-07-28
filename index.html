@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💜 Мега-квест для ARMY</title>
+    <title>💜 Мега-квест для лучшей из ARMY</title>
     <style>
         * {
             margin: 0;
@@ -20,7 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Плавающие сердечки */
         .floating-hearts {
             position: fixed;
             top: 0;
@@ -59,7 +58,6 @@
             z-index: 1;
         }
 
-        /* Прогресс-бар */
         .progress-section {
             margin-bottom: 25px;
             background: rgba(200, 170, 220, 0.15);
@@ -90,16 +88,6 @@
             justify-content: space-between;
             font-size: 0.85rem;
             color: #6a4a7a;
-        }
-
-        h1 {
-            text-align: center;
-            font-weight: 600;
-            font-size: 2.2rem;
-            letter-spacing: 3px;
-            color: #4a2e5c;
-            text-shadow: 0 2px 12px rgba(140, 100, 180, 0.15);
-            margin-bottom: 4px;
         }
 
         .subhead {
@@ -237,16 +225,6 @@
             transform: scale(0.96);
         }
 
-        .btn-success {
-            background: rgba(180, 138, 208, 0.25);
-            border-color: #b48ad0;
-            color: #4a2e5c;
-        }
-
-        .btn-success:hover {
-            background: rgba(180, 138, 208, 0.35);
-        }
-
         .status-badge {
             background: rgba(200, 170, 220, 0.15);
             border-radius: 30px;
@@ -270,79 +248,6 @@
             display: none !important;
         }
 
-        /* ===== ПАЗЛ ===== */
-        .puzzle-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            max-width: 300px;
-            margin: 12px auto;
-        }
-
-        .puzzle-piece {
-            aspect-ratio: 1;
-            background: rgba(180, 138, 208, 0.2);
-            border: 2px solid rgba(180, 140, 200, 0.3);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            cursor: grab;
-            transition: all 0.2s ease;
-            user-select: none;
-        }
-
-        .puzzle-piece.dragging {
-            opacity: 0.5;
-            transform: scale(0.9);
-        }
-
-        .puzzle-piece.droppable {
-            border-color: #b48ad0;
-            background: rgba(180, 138, 208, 0.15);
-            box-shadow: 0 0 20px rgba(180, 138, 208, 0.2);
-        }
-
-        .puzzle-piece.placed {
-            cursor: default;
-            border-color: #8a6a9a;
-            background: rgba(180, 138, 208, 0.1);
-        }
-
-        /* ===== РАСКРАСКА ===== */
-        .color-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            max-width: 300px;
-            margin: 12px auto;
-        }
-
-        .color-cell {
-            aspect-ratio: 1;
-            background: #e8dff0;
-            border-radius: 12px;
-            border: 2px solid rgba(180, 140, 200, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .color-cell.colored {
-            border-color: #b48ad0;
-            transform: scale(0.95);
-        }
-
-        .color-cell:hover {
-            transform: scale(1.05);
-            border-color: #b48ad0;
-        }
-
-        /* ===== ЭМОДЗИ-ВИКТОРИНА ===== */
         .emoji-quiz-item {
             background: rgba(255, 248, 252, 0.4);
             padding: 10px 14px;
@@ -363,28 +268,6 @@
             max-width: 180px;
         }
 
-        /* ===== ВИДЕО-БЛОК ===== */
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 20px;
-            margin: 16px 0;
-            background: #1a0b2e;
-        }
-
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 20px;
-        }
-
-        /* ===== ФИНАЛ ===== */
         .final-message {
             text-align: center;
             padding: 30px 20px;
@@ -449,20 +332,15 @@
             .container { padding: 18px 14px; }
             .letter-slot { width: 40px; height: 48px; font-size: 1.4rem; }
             .task-title { font-size: 1rem; }
-            h1 { font-size: 1.6rem; }
             .final-message .big-word { font-size: 2.2rem; }
-            .puzzle-grid { max-width: 200px; }
-            .color-grid { max-width: 200px; }
         }
     </style>
 </head>
 <body>
 
-<!-- Плавающие сердечки -->
 <div class="floating-hearts" id="floatingHearts"></div>
 
 <div class="container">
-    <!-- Прогресс -->
     <div class="progress-section">
         <div class="progress-text">
             <span>💜 Прогресс</span>
@@ -474,7 +352,6 @@
     </div>
     <div class="subhead">пройди все испытания и собери заветное слово</div>
 
-    <!-- Буквы -->
     <div class="letter-panel" id="letterPanel">
         <div class="letter-slot" id="slot0">?</div>
         <div class="letter-slot" id="slot1">?</div>
@@ -566,28 +443,28 @@
     <div class="task-card" id="task7">
         <div class="task-title">🎵 БОНУС: Угадай песню по эмодзи <span>7/7</span></div>
         <div class="task-body">
-            <p>Отгадай 5 песен BTS по эмодзи-подсказкам:</p>
+            <p>Отгадай 4 песни BTS по эмодзи-подсказкам:</p>
             <div class="emoji-quiz-item">
                 <span class="emojis">🔥🥵</span>
-                <input type="text" id="emoji1" placeholder=" " style="max-width:150px;">
+                <input type="text" id="emoji1" style="max-width:150px;">
             </div>
             <div class="emoji-quiz-item">
                 <span class="emojis">🧨💥</span>
-                <input type="text" id="emoji2" placeholder=" " style="max-width:150px;">
+                <input type="text" id="emoji2" style="max-width:150px;">
             </div>
             <div class="emoji-quiz-item">
                 <span class="emojis">🧈🫠</span>
-                <input type="text" id="emoji3" placeholder=" " style="max-width:150px;">
+                <input type="text" id="emoji3" style="max-width:150px;">
             </div>
             <div class="emoji-quiz-item">
                 <span class="emojis">🌊🩱</span>
-                <input type="text" id="emoji4" placeholder=" " style="max-width:150px;">
+                <input type="text" id="emoji4" style="max-width:150px;">
             </div>
             <div class="flex-center">
                 <button class="btn" id="checkEmoji">Проверить все</button>
                 <span id="status7" class="status-badge">⏳</span>
             </div>
-            <div class="hint-text">Подсказка: не будет подсказки))</div>
+            <div class="hint-text">Подсказка: Fire, Dynamite, Butter, ... (третья песня с пляжем)</div>
         </div>
     </div>
     
@@ -597,8 +474,7 @@
         <div class="big-word">БОРАХЭ</div>
         <div style="font-size:2.2rem; margin:8px 0; letter-spacing:8px;">💜💜💜</div>
         <p style="color:#5a406a; font-size:1.2rem; font-weight:400;">
-            보라해 — «Я буду любить тебя фиолетовым цветом» 💜<br>
-            <span id="finalWishDisplay" style="font-style:italic; color:#8a6a9a;"></span>
+            보라해 — «Я буду любить тебя фиолетовым цветом» 💜
         </p>
         <div class="confetti-container">
             <span class="confetti-item" style="animation-delay:0s;">🌸</span>
@@ -609,21 +485,19 @@
             <span class="confetti-item" style="animation-delay:1.5s;">💜</span>
         </div>
         <p style="color:#7a5c8a; font-size:0.95rem; margin-top:10px;">
-            С днём рождения, наша прекрасная Кариша!<br>
+            С днём рождения, наша прекрасная ARMY!<br>
             Ты прошла все испытания и доказала свою любовь к BTS!
         </p>
     </div>
 
-    <div class="footer">✧ BTS · для самой прекрасной ARMY ✧</div>
+    <div class="footer">✧ BTS · БОРАХЭ · для самой прекрасной ARMY ✧</div>
 </div>
 
 <script>
 (function(){
     const state = {
         letters: ['', '', '', '', '', ''],
-        done: [false, false, false, false, false, false, false],
-        puzzleSolved: false,
-        colorCount: 0
+        done: [false, false, false, false, false, false, false]
     };
 
     const targetWord = 'БОРАХЭ';
@@ -693,6 +567,7 @@
                 setLetter(letterIndex, letter);
             }
             updateProgress();
+            updatePanel();
             return true;
         }
         return false;
@@ -736,17 +611,15 @@
         });
     }
 
-    // ===== 1-6: Обычные задания =====
+    // ===== ЗАДАНИЯ 1-6 (дают буквы) =====
     setupTask(0, 'input1', 'status1', 'check1', ['130613', '0613', '13.06', '1306'], 0, 'Б');
-    setupTask(1, 'input2', 'status2', 'check2', [
-        'бронежилет',
-    ], 1, 'О');
+    setupTask(1, 'input2', 'status2', 'check2', ['бронежилет', 'щит', 'логотип', 'двери'], 1, 'О');
     setupTask(2, 'input3', 'status3', 'check3', ['be', 'вэ'], 2, 'Р');
     setupTask(3, 'input4', 'status4', 'check4', ['army', 'арми'], 3, 'А');
     setupTask(4, 'input5', 'status5', 'check5', ['фиолетовый', 'фиолет', 'пурпурный'], 4, 'Х');
     setupTask(5, 'input6', 'status6', 'check6', ['борахэ', 'borahae', '보라해'], 5, 'Э');
 
-    // ===== 7: ЭМОДЗИ =====
+    // ===== ЗАДАНИЕ 7: ЭМОДЗИ (бонус, не даёт букву) =====
     document.getElementById('checkEmoji').addEventListener('click', function() {
         if (state.done[6]) {
             document.getElementById('status7').textContent = '✅ уже сделано';
@@ -756,7 +629,7 @@
             document.getElementById('emoji1').value.trim().toLowerCase(),
             document.getElementById('emoji2').value.trim().toLowerCase(),
             document.getElementById('emoji3').value.trim().toLowerCase(),
-            document.getElementById('emoji4').value.trim().toLowerCase(),
+            document.getElementById('emoji4').value.trim().toLowerCase()
         ];
         const correct = ['fire', 'dynamite', 'butter', 'swim'];
         let allCorrect = true;
@@ -767,145 +640,10 @@
             }
         }
         if (allCorrect) {
-            document.getElementById('status7').textContent = '✅ верно! + буква (уже есть)';
+            document.getElementById('status7').textContent = '✅ верно! Молодец!';
             markDone(6);
-            // Даём дополнительную подсказку или просто отмечаем
         } else {
             document.getElementById('status7').textContent = '❌ не все угаданы, попробуй ещё';
-        }
-    });
-
-    // ===== 8: ПАЗЛ =====
-    let puzzlePieces = document.querySelectorAll('.puzzle-piece');
-    let draggedPiece = null;
-
-    puzzlePieces.forEach(piece => {
-        piece.addEventListener('dragstart', function(e) {
-            if (this.classList.contains('placed')) return;
-            draggedPiece = this;
-            this.classList.add('dragging');
-            e.dataTransfer.effectAllowed = 'move';
-        });
-
-        piece.addEventListener('dragend', function() {
-            this.classList.remove('dragging');
-        });
-
-        piece.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            if (this !== draggedPiece && !this.classList.contains('placed')) {
-                this.classList.add('droppable');
-            }
-        });
-
-        piece.addEventListener('dragleave', function() {
-            this.classList.remove('droppable');
-        });
-
-        piece.addEventListener('drop', function(e) {
-            e.preventDefault();
-            this.classList.remove('droppable');
-            if (this !== draggedPiece && !this.classList.contains('placed') && !draggedPiece.classList.contains('placed')) {
-                // Меняем местами
-                const tempText = this.textContent;
-                const tempData = this.dataset.piece;
-                this.textContent = draggedPiece.textContent;
-                this.dataset.piece = draggedPiece.dataset.piece;
-                draggedPiece.textContent = tempText;
-                draggedPiece.dataset.piece = tempData;
-            }
-        });
-    });
-
-    document.getElementById('checkPuzzle').addEventListener('click', function() {
-        if (state.done[7]) {
-            document.getElementById('status8').textContent = '✅ уже сделано';
-            return;
-        }
-        const pieces = document.querySelectorAll('.puzzle-piece');
-        const values = Array.from(pieces).map(p => p.textContent);
-        // Проверяем, есть ли 3 одинаковых в ряд (по сетке 3x3)
-        let solved = false;
-        for (let row = 0; row < 3; row++) {
-            if (values[row*3] === values[row*3+1] && values[row*3+1] === values[row*3+2]) {
-                solved = true;
-                break;
-            }
-        }
-        if (!solved) {
-            for (let col = 0; col < 3; col++) {
-                if (values[col] === values[col+3] && values[col+3] === values[col+6]) {
-                    solved = true;
-                    break;
-                }
-            }
-        }
-        if (solved) {
-            document.getElementById('status8').textContent = '✅ пазл собран!';
-            markDone(7);
-            pieces.forEach(p => p.classList.add('placed'));
-        } else {
-            document.getElementById('status8').textContent = '❌ не хватает 3 в ряд';
-        }
-    });
-
-    // ===== 9: РАСКРАСКА =====
-    const colorCells = document.querySelectorAll('.color-cell');
-    const colorCountEl = document.getElementById('colorCount');
-
-    colorCells.forEach(cell => {
-        cell.addEventListener('click', function() {
-            if (this.dataset.colored === 'false') {
-                this.dataset.colored = 'true';
-                this.style.background = 'linear-gradient(135deg, #b48ad0, #8a6a9a)';
-                this.classList.add('colored');
-                this.textContent = '💜';
-                state.colorCount++;
-                colorCountEl.textContent = `${state.colorCount} / 16`;
-            } else {
-                this.dataset.colored = 'false';
-                this.style.background = '#e8dff0';
-                this.classList.remove('colored');
-                this.textContent = '';
-                state.colorCount--;
-                colorCountEl.textContent = `${state.colorCount} / 16`;
-            }
-        });
-    });
-
-    document.getElementById('checkColor').addEventListener('click', function() {
-        if (state.done[8]) {
-            document.getElementById('status9').textContent = '✅ уже сделано';
-            return;
-        }
-        if (state.colorCount >= 12) {
-            document.getElementById('status9').textContent = '✅ классно!';
-            markDone(8);
-        } else {
-            document.getElementById('status9').textContent = `❌ нужно закрасить хотя бы 12 (у тебя ${state.colorCount})`;
-        }
-    });
-
-    // ===== 10: ФИНАЛЬНАЯ ОТКРЫТКА =====
-    document.getElementById('checkFinal').addEventListener('click', function() {
-        if (state.done[9]) {
-            document.getElementById('status10').textContent = '✅ уже готово';
-            return;
-        }
-        const wish = document.getElementById('finalWish').value.trim();
-        if (wish.length > 0) {
-            document.getElementById('status10').textContent = '💜 спасибо за тёплые слова!';
-            markDone(9);
-            // Показываем финал, если все остальные задания сделаны
-            updatePanel();
-        } else {
-            document.getElementById('status10').textContent = '💜 напиши хоть что-нибудь или нажми "Готово"';
-            // Можно пропустить с пустым пожеланием
-            if (confirm('Хочешь пропустить это задание?')) {
-                document.getElementById('status10').textContent = '💜 пропущено';
-                markDone(9);
-                updatePanel();
-            }
         }
     });
 
