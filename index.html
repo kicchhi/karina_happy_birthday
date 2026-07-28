@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTS Викторина для ARMY</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(145deg, #1a0b2e 0%, #2d1b4e 50%, #4a2c6a 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 48px;
+            padding: 30px 25px 40px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 200, 255, 0.15);
+            border: 1px solid rgba(255, 200, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        h1 {
+            text-align: center;
+            font-weight: 700;
+            font-size: 2.1rem;
+            letter-spacing: 2px;
+            color: #ffe6ff;
+            text-shadow: 0 0 20px #c084fc, 0 0 40px #a855f7;
+            margin-bottom: 10px;
+        }
+
+        .subhead {
+            text-align: center;
+            color: #d8b4fe;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+            padding-bottom: 15px;
+        }
+
+        .letter-panel {
+            background: rgba(0, 0, 0, 0.35);
+            border-radius: 100px;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+            border: 1px solid #b794f4;
+            box-shadow: inset 0 0 20px rgba(120, 80, 200, 0.3);
+        }
+
+        .letter-slot {
+            width: 48px;
+            height: 56px;
+            background: rgba(30, 15, 50, 0.8);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #f0e6ff;
+            border: 2px solid #7c3aed;
+            box-shadow: 0 0 15px rgba(124, 58, 237, 0.3);
+            transition: 0.3s;
+        }
+
+        .letter-slot.filled {
+            border-color: #fbbf24;
+            background: rgba(251, 191, 36, 0.15);
+            box-shadow: 0 0 30px #fbbf24;
+            color: #fde68a;
+            transform: scale(1.05);
+        }
+
+        .task-card {
+            background: rgba(20, 10, 40, 0.6);
+            backdrop-filter: blur(6px);
+            border-radius: 32px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(200, 150, 255, 0.25);
+            transition: 0.25s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .task-title {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #e9d5ff;
+            margin-bottom: 18px;
+            border-bottom: 2px solid rgba(168, 85, 247, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .task-title span {
+            background: #7c3aed;
+            border-radius: 30px;
+            padding: 0 16px;
+            font-size: 0.9rem;
+            color: white;
+        }
+
+        .task-body {
+            color: #e2d5f0;
+            line-height: 1.6;
+        }
+
+        .task-body input, .task-body select {
+            background: #2a1a3f;
+            border: 1px solid #6b4b8b;
+            border-radius: 30px;
+            padding: 10px 18px;
+            color: #f0e6ff;
+            font-size: 1rem;
+            width: 100%;
+            max-width: 280px;
+            margin: 8px 0;
+            transition: 0.2s;
+            outline: none;
+        }
+
+        .task-body input:focus {
+            border-color: #c084fc;
+            box-shadow: 0 0 20px #7c3aed;
+            background: #1f1135;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            border: none;
+            padding: 10px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(109, 40, 217, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 6px 4px;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            box-shadow: 0 6px 25px #7c3aed;
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #1a0b2e;
+            box-shadow: 0 4px 15px #fbbf24;
+        }
+
+        .btn-success:hover {
+            background: linear-gradient(135deg, #fcd34d, #fbbf24);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .flex-center {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .grid-questions {
+            display: grid;
+            gap: 16px;
+            margin: 15px 0;
+        }
+
+        .question-item {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 12px 14px;
+            border-radius: 20px;
+            border-left: 4px solid #a855f7;
+        }
+
+        .question-item label {
+            display: block;
+            font-weight: 500;
+            color: #d8b4fe;
+            margin-bottom: 6px;
+        }
+
+        .question-item select {
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .heart-game {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .heart {
+            font-size: 2.6rem;
+            cursor: pointer;
+            transition: 0.2s;
+            filter: drop-shadow(0 0 6px #f472b6);
+            user-select: none;
+        }
+
+        .heart:hover {
+            transform: scale(1.3) rotate(-8deg);
+            filter: drop-shadow(0 0 20px #ec4899);
+        }
+
+        .heart.caught {
+            opacity: 0.2;
+            transform: scale(0.6);
+            pointer-events: none;
+            filter: grayscale(1);
+        }
+
+        .pin-grid {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 10px 0;
+        }
+
+        .pin-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 30px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            background: #2a1a3f;
+            border: 2px solid #7c3aed;
+            color: white;
+            transition: 0.15s;
+            cursor: pointer;
+        }
+
+        .pin-btn:hover {
+            background: #7c3aed;
+            transform: scale(1.06);
+        }
+
+        .final-message {
+            text-align: center;
+            padding: 20px 10px;
+            background: rgba(251, 191, 36, 0.08);
+            border-radius: 40px;
+            border: 2px solid #fbbf24;
+        }
+
+        .final-message h2 {
+            color: #fcd34d;
+            font-size: 2.2rem;
+            text-shadow: 0 0 30px #f59e0b;
+        }
+
+        .confetti {
+            font-size: 2rem;
+            animation: float 1.8s infinite alternate ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(15deg); }
+        }
+
+        .status-badge {
+            background: #4a2c6a;
+            border-radius: 40px;
+            padding: 4px 16px;
+            font-size: 0.8rem;
+            color: #d8b4fe;
+            border: 1px solid #a855f7;
+            display: inline-block;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #6b4b8b;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 16px; }
+            .letter-slot { width: 40px; height: 48px; font-size: 1.6rem; }
+            .task-title { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container" id="app">
+    <h1>✨ BTS · АРМИЯ ✨</h1>
+    <div class="subhead">пройди все испытания и собери слово</div>
+
+    <!-- Панель букв -->
+    <div class="letter-panel" id="letterPanel">
+        <div class="letter-slot" id="slot0">?</div>
+        <div class="letter-slot" id="slot1">?</div>
+        <div class="letter-slot" id="slot2">?</div>
+        <div class="letter-slot" id="slot3">?</div>
+        <div class="letter-slot" id="slot4">?</div>
+        <div class="letter-slot" id="slot5">?</div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 1: КРОССВОРД ========== -->
+    <div class="task-card" id="task1">
+        <div class="task-title">🧩 Кроссворд <span>1/5</span></div>
+        <div class="task-body">
+            <p>Введи правильные ответы на вопросы о BTS:</p>
+            <div class="grid-questions">
+                <div class="question-item"><label>1. Лидер BTS (англ.)</label><input type="text" id="c1" placeholder="RM"></div>
+                <div class="question-item"><label>2. Альбом 2020 года (англ.)</label><input type="text" id="c2" placeholder="BE"></div>
+                <div class="question-item"><label>3. Дебютный трек (англ.)</label><input type="text" id="c3" placeholder="No More Dream"></div>
+            </div>
+            <div class="flex-center">
+                <button class="btn" id="checkCrossword">Проверить кроссворд</button>
+                <span id="crosswordStatus" class="status-badge">⏳ ждём</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 2: СЕРДЕЧКИ ========== -->
+    <div class="task-card" id="task2">
+        <div class="task-title">❤️ Найди фан-чику <span>2/5</span></div>
+        <div class="task-body">
+            <p>Кликай на сердца, собери 10 сердечек для ARMY!</p>
+            <div class="heart-game" id="heartContainer"></div>
+            <div class="flex-center">
+                <span id="heartCounter" class="status-badge">❤️ 0 / 10</span>
+                <button class="btn btn-success" id="resetHearts" style="background:#6b4b8b;">Сбросить</button>
+            </div>
+            <div id="heartMsg" style="margin-top:10px; font-weight:500; color:#fbbf24;"></div>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 3: ВИКТОРИНА ========== -->
+    <div class="task-card" id="task3">
+        <div class="task-title">🎤 Викторина <span>3/5</span></div>
+        <div class="task-body">
+            <p>Выбери верные ответы:</p>
+            <div class="grid-questions">
+                <div class="question-item"><label>1. Сколько участников в BTS?</label>
+                    <select id="q1"><option value="">—</option><option value="7">7</option><option value="8">8</option><option value="6">6</option></select>
+                </div>
+                <div class="question-item"><label>2. Какой цвет у фан-клуба ARMY?</label>
+                    <select id="q2"><option value="">—</option><option value="фиолетовый">фиолетовый</option><option value="розовый">розовый</option><option value="синий">синий</option></select>
+                </div>
+                <div class="question-item"><label>3. Где BTS впервые выступили на Billboard?</label>
+                    <select id="q3"><option value="">—</option><option value="2020">2020</option><option value="2017">2017</option><option value="2018">2018</option></select>
+                </div>
+            </div>
+            <div class="flex-center">
+                <button class="btn" id="checkQuiz">Проверить викторину</button>
+                <span id="quizStatus" class="status-badge">⏳ ждём</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 4: ПИН-КОД ========== -->
+    <div class="task-card" id="task4">
+        <div class="task-title">🔐 Секретный пин-код <span>4/5</span></div>
+        <div class="task-body">
+            <p>Введи дату дебюта BTS (день и месяц, 4 цифры):</p>
+            <div class="flex-center">
+                <input type="text" id="pinInput" placeholder="0613" maxlength="4" style="max-width:140px; text-align:center;">
+                <button class="btn" id="checkPin">Проверить</button>
+                <span id="pinStatus" class="status-badge">⏳ ждём</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ЗАДАНИЕ 5: ШИФР ========== -->
+    <div class="task-card" id="task5">
+        <div class="task-title">🧮 Финальный шифр <span>5/5</span></div>
+        <div class="task-body">
+            <p>Реши пример и нажми на кнопку с ответом:</p>
+            <div style="font-size:2rem; text-align:center; margin:15px 0; color:#f0e6ff;">7 + 7 − 5 = ?</div>
+            <div class="pin-grid">
+                <button class="pin-btn" data-num="7">7</button>
+                <button class="pin-btn" data-num="8">8</button>
+                <button class="pin-btn" data-num="9">9</button>
+                <button class="pin-btn" data-num="10">10</button>
+            </div>
+            <div class="flex-center">
+                <span id="cipherStatus" class="status-badge">⏳ ждём</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== ФИНАЛ ========== -->
+    <div id="finalContainer" class="hidden final-message">
+        <h2>🎉 ТЫ СОБРАЛА СЛОВО: <span style="color:#fcd34d;">АРМИЯ</span> 🎉</h2>
+        <div style="font-size:2.8rem; margin:12px 0; letter-spacing:10px;">💜💜💜</div>
+        <p style="color:#e9d5ff; font-size:1.2rem;">Поздравляю! Ты настоящая ARMY! 💜</p>
+        <div style="margin:20px 0; font-size:2.2rem;">
+            <span class="confetti">✨</span> <span class="confetti" style="animation-delay:0.3s;">🌸</span> <span class="confetti" style="animation-delay:0.6s;">💜</span> <span class="confetti" style="animation-delay:0.9s;">🌟</span>
+        </div>
+        <p style="color:#b794f4;">С днём рождения, ARMY! 💜</p>
+    </div>
+
+    <div class="footer">✧ BTS · для самой прекрасной ARMY ✧</div>
+</div>
+
+<script>
+    (function(){
+        // ----- СОСТОЯНИЕ -----
+        const state = {
+            letters: ['', '', '', '', '', ''],
+            crosswordDone: false,
+            heartsCollected: 0,
+            heartsTotal: 10,
+            quizDone: false,
+            pinDone: false,
+            cipherDone: false,
+            finalWord: 'АРМИЯ' // 6 букв
+        };
+
+        const slots = [
+            document.getElementById('slot0'),
+            document.getElementById('slot1'),
+            document.getElementById('slot2'),
+            document.getElementById('slot3'),
+            document.getElementById('slot4'),
+            document.getElementById('slot5')
+        ];
+
+        // Вспомогательные функции
+        function updateLetterPanel() {
+            for (let i = 0; i < 6; i++) {
+                if (state.letters[i]) {
+                    slots[i].textContent = state.letters[i];
+                    slots[i].classList.add('filled');
+                } else {
+                    slots[i].textContent = '?';
+                    slots[i].classList.remove('filled');
+                }
+            }
+            // Проверка на финал
+            const fullWord = state.letters.join('');
+            if (fullWord === state.finalWord) {
+                document.getElementById('finalContainer').classList.remove('hidden');
+                // Скрываем все задания
+                document.querySelectorAll('.task-card').forEach(el => el.style.display = 'none');
+            } else {
+                document.getElementById('finalContainer').classList.add('hidden');
+            }
+        }
+
+        function setLetter(index, letter) {
+            if (index >= 0 && index < 6 && !state.letters[index]) {
+                state.letters[index] = letter;
+                updateLetterPanel();
+                return true;
+            }
+            return false;
+        }
+
+        // ----- 1. КРОССВОРД -----
+        document.getElementById('checkCrossword').addEventListener('click', function(){
+            if (state.crosswordDone) {
+                document.getElementById('crosswordStatus').textContent = '✅ уже сделано';
+                return;
+            }
+            const a1 = document.getElementById('c1').value.trim().toLowerCase();
+            const a2 = document.getElementById('c2').value.trim().toLowerCase();
+            const a3 = document.getElementById('c3').value.trim().toLowerCase();
+            // правильные ответы (приведены к нижнему регистру)
+            const correct = ['rm', 'be', 'no more dream'];
+            if (a1 === correct[0] && a2 === correct[1] && a3 === correct[2]) {
+                state.crosswordDone = true;
+                document.getElementById('crosswordStatus').textContent = '✅ верно! + буква А';
+                setLetter(0, 'А');
+            } else {
+                document.getElementById('crosswordStatus').textContent = '❌ неверно, попробуй ещё';
+            }
+        });
+
+        // ----- 2. СЕРДЕЧКИ -----
+        const heartContainer = document.getElementById('heartContainer');
+        const heartCounter = document.getElementById('heartCounter');
+        const heartMsg = document.getElementById('heartMsg');
+
+        function renderHearts() {
+            heartContainer.innerHTML = '';
+            for (let i = 0; i < state.heartsTotal; i++) {
+                const span = document.createElement('span');
+                span.className = 'heart';
+                span.textContent = '💜';
+                if (i < state.heartsCollected) {
+                    span.classList.add('caught');
+                }
+                span.dataset.index = i;
+                span.addEventListener('click', function(e){
+                    const idx = parseInt(this.dataset.index);
+                    if (idx === state.heartsCollected && state.heartsCollected < state.heartsTotal) {
+                        state.heartsCollected++;
+                        this.classList.add('caught');
+                        heartCounter.textContent = `❤️ ${state.heartsCollected} / ${state.heartsTotal}`;
+                        if (state.heartsCollected === state.heartsTotal) {
+                            heartMsg.textContent = '💜 Ты собрала все сердца! Получи букву Р!';
+                            if (!state.letters[1]) {
+                                setLetter(1, 'Р');
+                            }
+                        }
+                    }
+                });
+                heartContainer.appendChild(span);
+            }
+        }
+
+        document.getElementById('resetHearts').addEventListener('click', function(){
+            state.heartsCollected = 0;
+            heartMsg.textContent = '';
+            renderHearts();
+            heartCounter.textContent = `❤️ 0 / ${state.heartsTotal}`;
+            // если буква уже была, можно не убирать, но мы оставим букву, если она уже получена
+            // но чтобы не было бага, если сбросили раньше — ничего страшного
+        });
+
+        renderHearts();
+
+        // ----- 3. ВИКТОРИНА -----
+        document.getElementById('checkQuiz').addEventListener('click', function(){
+            if (state.quizDone) {
+                document.getElementById('quizStatus').textContent = '✅ уже сделано';
+                return;
+            }
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const q3 = document.getElementById('q3').value;
+            if (q1 === '7' && q2 === 'фиолетовый' && q3 === '2017') {
+                state.quizDone = true;
+                document.getElementById('quizStatus').textContent = '✅ верно! + буква М';
+                setLetter(2, 'М');
+            } else {
+                document.getElementById('quizStatus').textContent = '❌ не все ответы верны';
+            }
+        });
+
+        // ----- 4. ПИН-КОД -----
+        document.getElementById('checkPin').addEventListener('click', function(){
+            if (state.pinDone) {
+                document.getElementById('pinStatus').textContent = '✅ уже сделано';
+                return;
+            }
+            const pin = document.getElementById('pinInput').value.trim();
+            if (pin === '0613') {
+                state.pinDone = true;
+                document.getElementById('pinStatus').textContent = '✅ верно! + буква И';
+                setLetter(3, 'И');
+            } else {
+                document.getElementById('pinStatus').textContent = '❌ неверный пин-код';
+            }
+        });
+
+        // ----- 5. ШИФР (кнопки) -----
+        document.querySelectorAll('.pin-btn').forEach(btn => {
+            btn.addEventListener('click', function(){
+                if (state.cipherDone) {
+                    document.getElementById('cipherStatus').textContent = '✅ уже сделано';
+                    return;
+                }
+                const num = parseInt(this.dataset.num);
+                if (num === 9) { // 7+7-5=9
+                    state.cipherDone = true;
+                    document.getElementById('cipherStatus').textContent = '✅ верно! + буква Я';
+                    setLetter(4, 'Я');
+                } else {
+                    document.getElementById('cipherStatus').textContent = '❌ не тот ответ, подумай ещё';
+                }
+            });
+        });
+
+        // ---- ИНИЦИАЛИЗАЦИЯ ----
+        // Для удобства, чтобы можно было получить 5-ю букву (Я) — последняя буква уже есть, но пятая буква = Я
+        // В слове АРМИЯ: 0=А, 1=Р, 2=М, 3=И, 4=Я, 5=? (но слово АРМИЯ из 5 букв? мы сделали 6 слотов, оставим 6-й как запасной)
+        // Так как в слове АРМИЯ 5 букв, а у нас 6 слотов, сделаем чтобы последний слот был пустым или декоративным.
+        // Исправим: сделаем слово из 6 букв — АРМИЯ (5) + запасная буква, например, "!" или оставим пустым.
+        // Но чтобы не сбивать, изменим логику: финальное слово "АРМИЯ" из 5 букв, но у нас 6 слотов.
+        // Сделаем 5 слотов? Но панель красивее с 6. Оставим 6 слотов, и сделаем что 6-я буква не нужна.
+        // Переопределим финал: если первые 5 букв = АРМИЯ — победа.
+        // Для этого перепишем updateLetterPanel и проверку финала:
+        const originalUpdate = updateLetterPanel;
+        updateLetterPanel = function() {
+            for (let i = 0; i < 6; i++) {
+                if (state.letters[i]) {
+                    slots[i].textContent = state.letters[i];
+                    slots[i].classList.add('filled');
+                } else {
+                    slots[i].textContent = '?';
+                    slots[i].classList.remove('filled');
+                }
+            }
+            // Проверка только первых 5 букв
+            const word = state.letters.slice(0,5).join('');
+            if (word === state.finalWord) {
+                document.getElementById('finalContainer').classList.remove('hidden');
+                document.querySelectorAll('.task-card').forEach(el => el.style.display = 'none');
+                // скрываем панель с буквами? нет, пусть висит
+            } else {
+                document.getElementById('finalContainer').classList.add('hidden');
+            }
+        };
+        // перезапустим отображение
+        updateLetterPanel();
+
+        // чтобы 6-я буква не мешала — зафиксируем
+        // также убираем возможность установить 5-ю букву (индекс 4) — она Я, и 6-я пусть остается пустой.
+        // Переопределим setLetter чтобы нельзя было поставить 6-ю
+        const originalSetLetter = setLetter;
+        setLetter = function(index, letter) {
+            if (index >= 0 && index < 5 && !state.letters[index]) {
+                state.letters[index] = letter;
+                updateLetterPanel();
+                return true;
+            }
+            return false;
+        };
+
+        // фикс для кроссворда: ставим 0
+        // для сердец: ставим 1
+        // для викторины: ставим 2
+        // для пин-кода: ставим 3
+        // для шифра: ставим 4 (Я)
+
+        // перепривяжем события, т.к. setLetter переопределена
+
+        // чиним кроссворд:
+        document.getElementById('checkCrossword').addEventListener('click', function(){
+            if (state.crosswordDone) {
+                document.getElementById('crosswordStatus').textContent = '✅ уже сделано';
+                return;
+            }
+            const a1 = document.getElementById('c1').value.trim().toLowerCase();
+            const a2 = document.getElementById('c2').value.trim().toLowerCase();
+            const a3 = document.getElementById('c3').value.trim().toLowerCase();
+            if (a1 === 'rm' && a2 === 'be' && a3 === 'no more dream') {
+                state.crosswordDone = true;
+                document.getElementById('crosswordStatus').textContent = '✅ верно! + буква А';
+                setLetter(0, 'А');
+            } else {
+                document.getElementById('crosswordStatus').textContent = '❌ неверно, попробуй ещё';
+            }
+        });
+
+        // сердце: 
+        // уже добавлено, но перезапишем setLetter внутри
+        // переопределим обработчик сердец
+        heartContainer.innerHTML = '';
+        // заново создадим
+        function renderHeartsFixed() {
+            heartContainer.innerHTML = '';
+            for (let i = 0; i < state.heartsTotal; i++) {
+                const span = document.createElement('span');
+                span.className = 'heart';
+                span.textContent = '💜';
+                if (i < state.heartsCollected) {
+                    span.classList.add('caught');
+                }
+                span.dataset.index = i;
+                span.addEventListener('click', function(e){
+                    const idx = parseInt(this.dataset.index);
+                    if (idx === state.heartsCollected && state.heartsCollected < state.heartsTotal) {
+                        state.heartsCollected++;
+                        this.classList.add('caught');
+                        heartCounter.textContent = `❤️ ${state.heartsCollected} / ${state.heartsTotal}`;
+                        if (state.heartsCollected === state.heartsTotal) {
+                            heartMsg.textContent = '💜 Ты собрала все сердца! Получи букву Р!';
+                            if (!state.letters[1]) {
+                                setLetter(1, 'Р');
+                            }
+                        }
+                    }
+                });
+                heartContainer.appendChild(span);
+            }
+        }
+        renderHeartsFixed();
+
+        // Викторина:
+        document.getElementById('checkQuiz').addEventListener('click', function(){
+            if (state.quizDone) {
+                document.getElementById('quizStatus').textContent = '✅ уже сделано';
+                return;
+            }
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const q3 = document.getElementById('q3').value;
+            if (q1 === '7' && q2 === 'фиолетовый' && q3 === '2017') {
+                state.quizDone = true;
+                document.getElementById('quizStatus').textContent = '✅ верно! + буква М';
+                setLetter(2, 'М');
+            } else {
+                document.getElementById('quizStatus').textContent = '❌ не все ответы верны';
+            }
+        });
+
+        // Пин:
+        document.getElementById('checkPin').addEventListener('click', function(){
+            if (state.pinDone) {
+                document.getElementById('pinStatus').textContent = '✅ уже сделано';
+                return;
+            }
+            const pin = document.getElementById('pinInput').value.trim();
+            if (pin === '0613') {
+                state.pinDone = true;
+                document.getElementById('pinStatus').textContent = '✅ верно! + буква И';
+                setLetter(3, 'И');
+            } else {
+                document.getElementById('pinStatus').textContent = '❌ неверный пин-код';
+            }
+        });
+
+        // Шифр
+        document.querySelectorAll('.pin-btn').forEach(btn => {
+            btn.addEventListener('click', function(){
+                if (state.cipherDone) {
+                    document.getElementById('cipherStatus').textContent = '✅ уже сделано';
+                    return;
+                }
+                const num = parseInt(this.dataset.num);
+                if (num === 9) {
+                    state.cipherDone = true;
+                    document.getElementById('cipherStatus').textContent = '✅ верно! + буква Я';
+                    setLetter(4, 'Я');
+                } else {
+                    document.getElementById('cipherStatus').textContent = '❌ не тот ответ';
+                }
+            });
+        });
+
+        // финал
+        updateLetterPanel();
+    })();
+</script>
+</body>
+</html>
