@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💜 Мега-квест для лучшей из ARMY</title>
+    <title>💜 Мега-квест для ARMY</title>
     <style>
         * {
             margin: 0;
@@ -344,7 +344,7 @@
     <div class="progress-section">
         <div class="progress-text">
             <span>💜 Прогресс</span>
-            <span id="progressCount">0 / 7</span>
+            <span id="progressCount">0 / 6</span>
         </div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
@@ -363,7 +363,7 @@
 
     <!-- ===== ЗАДАНИЕ 1 ===== -->
     <div class="task-card" id="task1">
-        <div class="task-title">📅 День, который всё изменил <span>1/7</span></div>
+        <div class="task-title">📅 День, который всё изменил <span>1/6</span></div>
         <div class="task-body">
             <p>Введи дату дебюта BTS (день и месяц, 4 цифры)</p>
             <div class="flex-center">
@@ -376,7 +376,7 @@
 
     <!-- ===== ЗАДАНИЕ 2 ===== -->
     <div class="task-card" id="task2">
-        <div class="task-title">👥 Семь звёзд <span>2/7</span></div>
+        <div class="task-title">👥 Семь звёзд <span>2/6</span></div>
         <div class="task-body">
             <p>Что изображено на логотипе BTS?</p>
             <div class="flex-center">
@@ -389,7 +389,7 @@
 
     <!-- ===== ЗАДАНИЕ 3 ===== -->
     <div class="task-card" id="task3">
-        <div class="task-title">💿 Альбом-исцеление <span>3/7</span></div>
+        <div class="task-title">💿 Альбом-исцеление <span>3/6</span></div>
         <div class="task-body">
             <p>Как называется альбом BTS, вышедший в 2020 году?</p>
             <div class="flex-center">
@@ -402,7 +402,7 @@
 
     <!-- ===== ЗАДАНИЕ 4 ===== -->
     <div class="task-card" id="task4">
-        <div class="task-title">💜 Самое тёплое сообщество <span>4/7</span></div>
+        <div class="task-title">💜 Самое тёплое сообщество <span>4/6</span></div>
         <div class="task-body">
             <p>Как называется фан-клуб BTS?</p>
             <div class="flex-center">
@@ -415,7 +415,7 @@
 
     <!-- ===== ЗАДАНИЕ 5 ===== -->
     <div class="task-card" id="task5">
-        <div class="task-title">🌈 Цвет твоей души <span>5/7</span></div>
+        <div class="task-title">🌈 Цвет твоей души <span>5/6</span></div>
         <div class="task-body">
             <p>Какой цвет стал символом BTS и ARMY?</p>
             <div class="flex-center">
@@ -426,22 +426,9 @@
         </div>
     </div>
 
-    <!-- ===== ЗАДАНИЕ 6 ===== -->
+    <!-- ===== ЗАДАНИЕ 6: ЭМОДЗИ-ВИКТОРИНА ===== -->
     <div class="task-card" id="task6">
-        <div class="task-title">💫 Секретная фраза <span>6/7</span></div>
-        <div class="task-body">
-            <p>Напиши знаменитую фразу BTS для ARMY (на корейском или русском)</p>
-            <div class="flex-center">
-                <input type="text" id="input6" style="max-width:280px;">
-                <button class="btn" id="check6">Проверить</button>
-                <span id="status6" class="status-badge">⏳</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== ЗАДАНИЕ 7: ЭМОДЗИ-ВИКТОРИНА ===== -->
-    <div class="task-card" id="task7">
-        <div class="task-title">🎵 БОНУС: Угадай песню по эмодзи <span>7/7</span></div>
+        <div class="task-title">🎵 БОНУС: Угадай песню по эмодзи <span>6/6</span></div>
         <div class="task-body">
             <p>Отгадай 4 песни BTS по эмодзи-подсказкам:</p>
             <div class="emoji-quiz-item">
@@ -462,7 +449,7 @@
             </div>
             <div class="flex-center">
                 <button class="btn" id="checkEmoji">Проверить все</button>
-                <span id="status7" class="status-badge">⏳</span>
+                <span id="status6" class="status-badge">⏳</span>
             </div>
             <div class="hint-text">Подсказка: Fire, Dynamite, Butter, ... (третья песня с пляжем)</div>
         </div>
@@ -497,7 +484,7 @@
 (function(){
     const state = {
         letters: ['', '', '', '', '', ''],
-        done: [false, false, false, false, false, false, false]
+        done: [false, false, false, false, false, false]
     };
 
     const targetWord = 'БОРАХЭ';
@@ -533,7 +520,7 @@
             }
         }
         
-        // Проверяем: все ли 7 заданий выполнены И слово собрано
+        // Проверяем: все ли 6 заданий выполнены И слово собрано
         const allTasksDone = state.done.every(d => d === true);
         const word = state.letters.join('');
         
@@ -546,8 +533,8 @@
 
     function updateProgress() {
         const done = state.done.filter(Boolean).length;
-        progressCount.textContent = `${done} / 7`;
-        progressFill.style.width = `${(done / 7) * 100}%`;
+        progressCount.textContent = `${done} / 6`;
+        progressFill.style.width = `${(done / 6) * 100}%`;
     }
 
     function setLetter(index, letter) {
@@ -611,18 +598,17 @@
         });
     }
 
-    // ===== ЗАДАНИЯ 1-6 (дают буквы) =====
+    // ===== ЗАДАНИЯ 1-5 (дают буквы) =====
     setupTask(0, 'input1', 'status1', 'check1', ['130613', '0613', '13.06', '1306'], 0, 'Б');
     setupTask(1, 'input2', 'status2', 'check2', ['бронежилет', 'щит', 'логотип', 'двери'], 1, 'О');
     setupTask(2, 'input3', 'status3', 'check3', ['be', 'вэ'], 2, 'Р');
     setupTask(3, 'input4', 'status4', 'check4', ['army', 'арми'], 3, 'А');
     setupTask(4, 'input5', 'status5', 'check5', ['фиолетовый', 'фиолет', 'пурпурный'], 4, 'Х');
-    setupTask(5, 'input6', 'status6', 'check6', ['борахэ', 'borahae', '보라해'], 5, 'Э');
 
-    // ===== ЗАДАНИЕ 7: ЭМОДЗИ (бонус, не даёт букву) =====
+    // ===== ЗАДАНИЕ 6: ЭМОДЗИ (бонус, не даёт букву) =====
     document.getElementById('checkEmoji').addEventListener('click', function() {
-        if (state.done[6]) {
-            document.getElementById('status7').textContent = '✅ уже сделано';
+        if (state.done[5]) {
+            document.getElementById('status6').textContent = '✅ уже сделано';
             return;
         }
         const answers = [
@@ -640,10 +626,10 @@
             }
         }
         if (allCorrect) {
-            document.getElementById('status7').textContent = '✅ верно! Молодец!';
-            markDone(6);
+            document.getElementById('status6').textContent = '✅ верно! Молодец!';
+            markDone(5);
         } else {
-            document.getElementById('status7').textContent = '❌ не все угаданы, попробуй ещё';
+            document.getElementById('status6').textContent = '❌ не все угаданы, попробуй ещё';
         }
     });
 
