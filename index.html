@@ -621,12 +621,12 @@
 (function(){
     const state = {
         letters: ['', '', '', '', '', ''],
-        done: [false, false, false, false, false, false, false, false, false, false],
+        done: [false, false, false, false, false, false, false],
         puzzleSolved: false,
         colorCount: 0
     };
 
-    const targetWord = 'БОРАХЕ';
+    const targetWord = 'БОРАХЭ';
     const slots = document.querySelectorAll('.letter-slot');
     const progressFill = document.getElementById('progressFill');
     const progressCount = document.getElementById('progressCount');
@@ -672,8 +672,8 @@
 
     function updateProgress() {
         const done = state.done.filter(Boolean).length;
-        progressCount.textContent = `${done} / 10`;
-        progressFill.style.width = `${(done / 10) * 100}%`;
+        progressCount.textContent = `${done} / 7`;
+        progressFill.style.width = `${(done / 7) * 100}%`;
     }
 
     function setLetter(index, letter) {
@@ -744,11 +744,11 @@
     setupTask(2, 'input3', 'status3', 'check3', ['be', 'вэ'], 2, 'Р');
     setupTask(3, 'input4', 'status4', 'check4', ['army', 'арми'], 3, 'А');
     setupTask(4, 'input5', 'status5', 'check5', ['фиолетовый', 'фиолет', 'пурпурный'], 4, 'Х');
-    setupTask(5, 'input6', 'status6', 'check6', ['борахе', 'borahae', '보라해'], 5, 'Э');
+    setupTask(5, 'input6', 'status6', 'check6', ['борахэ', 'borahae', '보라해'], 5, 'Э');
 
     // ===== 7: ЭМОДЗИ =====
     document.getElementById('checkEmoji').addEventListener('click', function() {
-        if (state.done[5]) {
+        if (state.done[6]) {
             document.getElementById('status7').textContent = '✅ уже сделано';
             return;
         }
@@ -768,7 +768,7 @@
         }
         if (allCorrect) {
             document.getElementById('status7').textContent = '✅ верно! + буква (уже есть)';
-            markDone(5);
+            markDone(6);
             // Даём дополнительную подсказку или просто отмечаем
         } else {
             document.getElementById('status7').textContent = '❌ не все угаданы, попробуй ещё';
